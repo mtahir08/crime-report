@@ -1,14 +1,14 @@
 import ActionTypes from './actionTypes';
 import * as fbConfigs from '../../configs/dbconfigs';
-
+import * as firebase from 'firebase';
 export function SignUpRequest(SignUpData) {
     return dispatch => {
         dispatch(signUpRequest());
-        fbConfigs.fbAuth.createUserWithEmailAndPassword(
+        firebase.auth().createUserWithEmailAndPassword(
             SignUpData.email, SignUpData.password
         )
             .then((data) => {
-                const userRef = fbConfigs.database.ref('/users/' + data.uid);
+                const userRef = firebase.database().ref('/users/' + data.uid);
                 userRef.set({
                     email: data.email
                 }, signUpSuccessData => {
@@ -34,7 +34,8 @@ function SignUpRequestSuccess(data) {
     };
 }
 
-function SignUpRequestFailed() {
+function SignUpRequestFailed(error) {
+    console.log(error)
     return {
         type: ActionTypes.SignUpRequestFailed
     };

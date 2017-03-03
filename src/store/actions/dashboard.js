@@ -1,7 +1,6 @@
 import ActionTypes from './actionTypes';
-import * as fbConfigs from '../../configs/dbconfigs';
 import * as firebase from 'firebase';
-export function loginRequest(loginData) {
+export function dashboard(loginData) {
     return dispatch => {
         dispatch(LoginRequest());
         firebase.auth().signInWithEmailAndPassword(

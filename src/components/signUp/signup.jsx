@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './signup.css';
 import * as mat from 'material-ui';
+import Header from '../header/header'
+
 import {
     hashHistory,
     Router,
@@ -20,7 +22,7 @@ class SignUp extends Component {
     }
 
 
-    componentDidMount() {
+ componentDidMount() {
         //This is called for Loading Initial State
         this.props.loadInitialState();
     }
@@ -46,38 +48,41 @@ class SignUp extends Component {
     render() {
         const { application } = this.props.application;
         return (
-            <div className="main-login-div">
-                <mat.Card>
-                    <mat.CardTitle title="Sign Up" />
-                    <mat.CardText>
-                        <p>Already Have account? <Link to="/login">Login</Link></p>
-                        <form onSubmit={this.handleSubmit} onChange={this.clearErrors}>
-                            <mat.TextField
-                                hintText="test@test.com"
-                                floatingLabelText="Email"
-                                className="full-width-container"
-                                ref="email"
-                                name="email"
-                                required={true}
-                                type="email"
-                                value={this.state.email}
-                                onChange={this.handleInputChange}
+            <div>
+                <Header label="login" />
+                <div className="main-login-div">
+                    <mat.Card>
+                        <mat.CardTitle title="Sign Up" />
+                        <mat.CardText>
+                            {/*<p>Already Have account? <Link to="/login">Login</Link></p>*/}
+                            <form onSubmit={this.handleSubmit} onChange={this.clearErrors}>
+                                <mat.TextField
+                                    hintText="test@test.com"
+                                    floatingLabelText="Email"
+                                    className="full-width-container"
+                                    ref="email"
+                                    name="email"
+                                    required={true}
+                                    type="email"
+                                    value={this.state.email}
+                                    onChange={this.handleInputChange}
                                 /><br />
-                            <mat.TextField
-                                hintText="password"
-                                ref="password"
-                                name="password"
-                                required={true}
-                                type="password"
-                                className="full-width-container"
-                                value={this.state.password}
-                                onChange={this.handleInputChange}
-                                floatingLabelText="Password" />
-                            <br />
-                            <mat.FlatButton type="submit" label="Submit" primary={true} />
-                        </form>
-                    </mat.CardText>
-                </mat.Card>
+                                <mat.TextField
+                                    hintText="password"
+                                    ref="password"
+                                    name="password"
+                                    required={true}
+                                    type="password"
+                                    className="full-width-container"
+                                    value={this.state.password}
+                                    onChange={this.handleInputChange}
+                                    floatingLabelText="Password" />
+                                <br />
+                                <mat.FlatButton type="submit" label="Submit" primary={true} />
+                            </form>
+                        </mat.CardText>
+                    </mat.Card>
+                </div>
             </div>
         );
     }

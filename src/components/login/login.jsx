@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './login.css';
 import * as mat from 'material-ui';
+import Header from '../header/header'
+
 import {
-  hashHistory,
-  Router,
-  Route,
-  IndexRoute,
-  Link,
-  IndexLink
+    hashHistory,
+    Router,
+    Route,
+    IndexRoute,
+    Link,
+    IndexLink
 } from 'react-router';
 
 class Login extends Component {
@@ -25,11 +27,19 @@ class Login extends Component {
         this.props.loadInitialState();
     }
 
-    handleLoginSubmit(evt) {
+    componentWillReceiveProps() {
+        setTimeout(() => {
+            if (this.props.application && this.props.application.user) {
+                hashHistory.push('/dashboard');
+            }
+        }, 5)
+    }
+
+     handleLoginSubmit(evt) {
         evt.preventDefault();
         var email = evt.target.email.value;
         var password = evt.target.password.value;
-        var userObj = {"email":email,"password" :password};
+        var userObj = { "email": email, "password": password };
         this.props.loginRequest(userObj);
     }
 
@@ -46,38 +56,41 @@ class Login extends Component {
     render() {
         const { application } = this.props.application;
         return (
-            <div className="main-login-div">
-                <mat.Card>
-                    <mat.CardTitle title="Login" />
-                    <mat.CardText>
-                        <p>Don`t Have account? <Link to="/signup">SignUp</Link></p>
-                        <form onSubmit={this.handleSubmit} onChange={this.clearErrors}>
-                            <mat.TextField
-                                hintText="test@test.com"
-                                floatingLabelText="Email"
-                                className="full-width-container"
-                                ref="email"
-                                name="email"
-                                required={true}
-                                type="email"
-                                value={this.state.email}
-                                onChange={this.handleInputChange}
+            <div>
+                <Header label="signup" />
+                <div className="main-login-div">
+                    <mat.Card>
+                        <mat.CardTitle title="Login" />
+                        <mat.CardText>
+                            {/*<p>Don`t Have account? <Link to="/signup">SignUp</Link></p>*/}
+                            <form onSubmit={this.handleSubmit} onChange={this.clearErrors}>
+                                <mat.TextField
+                                    hintText="test@test.com"
+                                    floatingLabelText="Email"
+                                    className="full-width-container"
+                                    ref="email"
+                                    name="email"
+                                    required={true}
+                                    type="email"
+                                    value={this.state.email}
+                                    onChange={this.handleInputChange}
                                 /><br />
-                            <mat.TextField
-                                hintText="password"
-                                ref="password"
-                                name="password"
-                                required={true}
-                                type="password"
-                                className="full-width-container"
-                                value={this.state.password}
-                                onChange={this.handleInputChange}
-                                floatingLabelText="Password" />
-                            <br />
-                            <mat.FlatButton type="submit" label="Submit" primary={true} />
-                        </form>
-                    </mat.CardText>
-                </mat.Card>
+                                <mat.TextField
+                                    hintText="password"
+                                    ref="password"
+                                    name="password"
+                                    required={true}
+                                    type="password"
+                                    className="full-width-container"
+                                    value={this.state.password}
+                                    onChange={this.handleInputChange}
+                                    floatingLabelText="Password" />
+                                <br />
+                                <mat.FlatButton type="submit" label="Submit" primary={true} />
+                            </form>
+                        </mat.CardText>
+                    </mat.Card>
+                </div>
             </div>
         );
     }

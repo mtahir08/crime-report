@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import store from './store/store';
 import LoginContainer from './containers/login';
 import SignUpContainer from './containers/signup';
+import DashboardContainer from './containers/dashboard';
+import ReportContainer from './containers/report'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -26,6 +28,8 @@ ReactDOM.render((
       <Router history={hashHistory}>
         <Route path="/">
           <IndexRedirect to="/login" />
+          <Route path="/dashboard" component={DashboardContainer} />
+          <Route path="/report" component={ ReportContainer } />
         </Route>
         <Route path="/login" component={LoginContainer}>
         </Route>
